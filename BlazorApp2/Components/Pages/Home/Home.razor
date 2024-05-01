@@ -1,0 +1,33 @@
+﻿@page "/"
+
+@* Enable interactivity on the page so that it isn't just statically rendered.
+The Interactive Server render mode enables the component to handle UI events from the server
+
+Doesn't work with cascading parameters*@
+@* @rendermode InteractiveServer  *@
+
+<PageTitle>Home</PageTitle>
+
+<Learn_Section />
+<Kit_Section />
+<Ask_Section />
+
+@code
+{
+    // // Define the parameter to hold data passed to the layout
+    // [CascadingParameter]
+    // public MainLayout Layout { get; set; }
+
+    // protected override void OnInitialized()
+    // {
+    //     base.OnInitialized();
+
+    //     string description = @"Welcome to Drummers Journey
+
+    //         This is a simple app to help you leran more about
+    //         drumming and ask other drummers questions
+    //         to help you grow on your drumming journey";
+
+    //     Layout.updateLayout("Home", description);
+    // }
+}

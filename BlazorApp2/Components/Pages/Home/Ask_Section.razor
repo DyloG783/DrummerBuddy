@@ -1,0 +1,33 @@
+<div class="container-fluid bg-light text-black bg-gradient">
+
+    @* Kit header section *@
+    <div class="row py-5 shadow">
+        <div class="col my-auto px-sm-5">
+            <p class="lead">
+                @description
+            </p>
+        </div>
+
+        <div class="col d-flex justify-content-center column-gap-4 ">
+            @* <i class="bi bi-earbuds" style="font-size: 2.5rem; color: aqua;"></i> *@
+            <h2 class="mt-2 display-1 text-info">Ask</h2>
+        </div>
+    </div>
+
+    @* main section *@
+    <section class="row py-4 py-sm-5">
+        <div class="col">
+            <img src="images/ask.webp" class="border rounded img-fluid" alt="people discussing image">
+        </div>
+        <div class="col d-flex justify-content-center align-items-center" >
+            <ul class="font-monospace fs-4">
+                <li>Post questions for others to respond to</li>
+                <li>Answer questions and gain reputation</li>
+            </ul> 
+        </div>
+    </section>
+</div>
+
+@code{
+    public string description = "Ask questions to other drummers and get personal feedback.";
+}

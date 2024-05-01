@@ -1,0 +1,51 @@
+﻿@* Enable interactivity on the page so that it isn't just statically rendered.
+The Interactive Server render mode enables the component to handle UI events from the server
+*@
+@rendermode InteractiveServer
+
+@using BlazorApp2.Data
+
+@using Microsoft.EntityFrameworkCore
+
+@inject ApplicationDbContext DB
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@* @foreach (var user in users)
+{
+    <p>@user.UserName</p>
+} *@
+
+@if (todo != null)
+{
+    <p>@todo.title</p>
+    <p>@todo.completed</p>
+}
+
+@code
+{
+    // // display users
+    // List<UserModel> users = new List<UserModel>();
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     users = await DB.Users.ToListAsync();
+    //     todo = await httpClient.GetFromJsonAsync<Todo>("https://jsonplaceholder.typicode.com/todos/1");
+    // }
+
+    // display random api data
+    public HttpClient httpClient = new HttpClient();
+    public Todo todo;
+
+    // temp model
+    public class Todo
+    {
+        public int userId { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public bool completed { get; set; }
+    }
+}
