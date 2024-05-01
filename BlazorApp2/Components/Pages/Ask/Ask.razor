@@ -1,20 +1,19 @@
 ﻿@page "/ask"
-@* @layout MainLayout *@
 
 @code {
-    // Define the parameter to hold data passed to the layout
-    // [CascadingParameter]
-    // public MainLayout Layout { get; set; }
-
-    // protected override void OnInitialized()
-    // {
-    //     string description = "This page is...";
-    //     Layout.updateLayout("Ask!", description);
-    // }
+    
 }
 
 <PageTitle>Ask</PageTitle>
 
 <h1>Ask</h1>
+
+<AuthorizeView Roles="Admin">
+    <button>Admin only!! so piss off!!</button>
+</AuthorizeView>
+<AuthorizeView Roles="User">
+    <button>Looser button only looser!! LOOSAER!!!</button>
+</AuthorizeView>
+
 
 
