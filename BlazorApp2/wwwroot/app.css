@@ -47,18 +47,13 @@ h1:focus {
 }
 
 .fixed-size {
-    width: 960px; /* Set the desired width */
-    height: 540px; /* Set the desired height */
+    width: 960px; 
+    height: 540px; 
 }
 
 section li {
     font: small-caps 1.2em/1.5em Georgia, serif;
     padding-bottom: 0.5em;
-}
-
-#testyy {
-    background-color: red;
-    color: aquamarine;
 }
 
 
