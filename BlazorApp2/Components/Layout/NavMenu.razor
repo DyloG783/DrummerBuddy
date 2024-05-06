@@ -2,71 +2,88 @@
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
-<div class=" navbar navbar-dark d-flex flex-column flex-sm-row">
-    <div class="p-3 ">
-        <a class="navbar-brand" href="">Drummer Buddies</a>
-    </div>
-    <div class="d-flex ">
-        <AuthorizeView>
-            <Authorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Manage">
-                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <form action="Account/Logout" method="post">
-                        <AntiforgeryToken />
-                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                        <button type="submit" class="nav-link">
-                            <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
-                        </button>
-                    </form>
-                </div>
-            </Authorized>
-            <NotAuthorized>
-                @* <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Register">
-                        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
-                    </NavLink>
-                </div> *@
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Login">
-                        <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
-                    </NavLink>
-                </div>
-            </NotAuthorized>
-        </AuthorizeView>
+<div class="navbar ">
+    <div class="p-3">
+        <a class="navbar-brand" href="">
+            <span class="page-heading-colour">Drummer</span> 
+            <span class="page-subheading-colour"> Buddies</span>
+        </a>
     </div>
 </div>
 
 <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-<div class="nav-scrollable">
-
-        <ul class="nav nav-pills d-flex gap-sm-5">
-            <li class="nav-item dropdown" id="learn-dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" ref="#" role="button" aria-expanded="false">
-                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Learn
-                </a>
-                <ul class="dropdown-menu bg-secondary">
-                    <li><a class="dropdown-item nav-item text-white" href="#">Fundamentals</a></li>
-                    <li><a class="dropdown-item nav-item text-white" href="technique">Techniques</a></li>
+<div class="nav-scrollable px-4 container-fluid">
+    <div class="row">
+        <ul class="nav nav-pills col col-sm-8 flex-column flex-sm-row justify-content-center gap-sm-5">
+            <li class="nav-item dropdown">
+                <NavLink class="nav-link dropdown-toggle nav-item" data-bs-toggle="dropdown" href="learn/" role="button" aria-expanded="false">
+                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span>Learn
+                </NavLink>
+                <ul id="learn-dropdown" class="dropdown-menu bg-secondary">
+                    <li class="nav-item">
+                        <NavLink 
+                            class="nav-link dropdown-item nav-item text-white" 
+                            href="learn/fundamentals/overview">Fundamentals
+                        </NavLink>
+                     </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link dropdown-item nav-item text-white" 
+                            href="learn/technique/overview"
+                        >Techniques</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link dropdown-item nav-item text-white" href="learn/inspiration">Inspiration</NavLink>
+                    </li>
                 </ul>
             </li>
 
             <li class="nav-item ">
                 <NavLink class="nav-link" href="kit">
-                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Kit
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span>Kit
                 </NavLink>
             </li>
 
             <li class="nav-item ">
                 <NavLink class="nav-link" href="ask">
-                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Ask
+                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>Ask
                 </NavLink>
             </li>
         </ul>
+        <div id="user-menu-container" class="col col-sm-4">
+            <AuthorizeView>
+                <Authorized>
+                    <div id="user-dropdown" class="nav-item dropdown d-flex justify-content-end">
+                        <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" ref="#" role="button" aria-expanded="false">
+                            <span class="bi bi-person-fill-nav-menu " aria-hidden="true"></span> @context.User.Identity?.Name
+                        </a>
+                        <ul class="dropdown-menu bg-secondary ">
+                            <li class="nav-link dropdown-item nav-item px-3">
+                                <NavLink class="nav-link" href="Account/Manage">
+                                    <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> Account
+                                </NavLink>
+                            </li>
+                            <li class="nav-link dropdown-item nav-item px-3">
+                                <form action="Account/Logout" method="post">
+                                    <AntiforgeryToken />
+                                    <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                                    <button type="submit" class="nav-link">
+                                        <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <div class="nav-item d-flex justify-content-end">
+                        <NavLink class="nav-link " href="Account/Login"><span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login</NavLink>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </div>
+    
 </div>
 
 @code {

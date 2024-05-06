@@ -1,36 +1,28 @@
-using System.Text.RegularExpressions;
+
 using BlazorApp2.Components.Layout;
 
 namespace Unit
 {
-    /// <summary>
-    /// These tests are written entirely in C#.
-    /// Learn more at https://bunit.dev/docs/getting-started/writing-tests.html#creating-basic-tests-in-cs-files
-    /// </summary>
     public class NavComponentTests : TestContext
     {
         [Fact]
         public void TitleExistsInNav()
         {
-            // Arrange
             this.AddTestAuthorization();
 
-            // Act
             var cut = RenderComponent<NavMenu>();
 
-            // Assert
-            Assert.Matches(cut.Find("a.navbar-brand").InnerHtml, "Drummer Buddies");
+            Assert.Equal("Drummer", cut.Find(".navbar-brand span:nth-child(1)").TextContent);
+            Assert.Equal(" Buddies", cut.Find(".navbar-brand span:nth-child(2)").TextContent);
         }
 
         [Fact]
         public void NavLinksArePresent()
         {
-            // Arrange
             this.AddTestAuthorization();
 
-            // Act
             var cut = RenderComponent<NavMenu>();
-            var navLinks = cut.FindAll(".nav .nav-link");
+            var navLinks = cut.FindAll(".nav > .nav-item");
 
             Assert.Equal(3, navLinks.Count);
             Assert.Contains("Learn", navLinks[0].InnerHtml);
@@ -41,16 +33,53 @@ namespace Unit
         [Fact]
         public void LearnSubLinksArePresent()
         {
-            // Arrange
             this.AddTestAuthorization();
 
-            // Act
             var cut = RenderComponent<NavMenu>();
-            var dropDownLinks = cut.FindAll("#learn-dropdown .nav-item");
+            var dropDownLinks = cut.FindAll("#learn-dropdown > li > a");
 
-            Assert.Equal(2, dropDownLinks.Count);
-            Assert.Matches(dropDownLinks[0].InnerHtml, "Fundamentals");
-            Assert.Matches(dropDownLinks[1].InnerHtml, "Techniques");
+            Assert.Equal(3, dropDownLinks.Count);
+            Assert.Contains("Fundamentals", dropDownLinks[0].InnerHtml);
+            Assert.Contains("Techniques", dropDownLinks[1].InnerHtml);
+            Assert.Contains("Inspiration", dropDownLinks[2].InnerHtml);
+        }
+
+        [Fact]
+        public void SignedOutStateShowsLoginLink()
+        {
+            this.AddTestAuthorization();
+
+            var cut = RenderComponent<NavMenu>();
+            var userMenu = cut.Find("#user-menu-container > .nav-item > .nav-link");
+
+            Assert.Contains("Login", userMenu.InnerHtml);
+            
+        }
+
+        [Fact]
+        public void SignedInStateShowsUserMenu()
+        {
+            var authContext = this.AddTestAuthorization();
+            authContext.SetAuthorized("TEST USER");
+
+            var cut = RenderComponent<NavMenu>();
+            var userMenu = cut.Find("#user-menu-container .dropdown-toggle");
+
+            Assert.Contains("TEST USER", userMenu.InnerHtml);
+        }
+
+        [Fact]
+        public void SignedInStateDropdownShowsUserMenuItems()
+        {
+            var authContext = this.AddTestAuthorization();
+            authContext.SetAuthorized("TEST USER");
+
+            var cut = RenderComponent<NavMenu>();
+            var userMenuLinks = cut.FindAll("#user-dropdown > .dropdown-menu > .nav-item");
+
+            Assert.Equal(2, userMenuLinks.Count);
+            Assert.Contains("Account", userMenuLinks[0].InnerHtml);
+            Assert.Contains("Logout", userMenuLinks[1].InnerHtml);
         }
     }
 }

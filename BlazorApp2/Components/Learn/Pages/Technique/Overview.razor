@@ -1,13 +1,18 @@
-﻿@page "/technique"
-@attribute [StreamRendering]
+﻿@page "/learn/technique/overview"
+@using BlazorApp2.Components.Learn.Shared
+@layout SideNavPageLayout
+
+@* @attribute [StreamRendering] *@
 
 <PageTitle>Technique</PageTitle>
 
-<h1>Technique</h1>
+<div class="h-100 d-flex flex-column justify-content-evenly text-black-50 bg-light dynamic-font">
+    <h1>Technique Overview</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
 
-<p>This component demonstrates showing data.</p>
 
-@if (forecasts == null)
+@* @if (forecasts == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -61,4 +66,4 @@ else
         public string? Summary { get; set; }
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
-}
+} *@

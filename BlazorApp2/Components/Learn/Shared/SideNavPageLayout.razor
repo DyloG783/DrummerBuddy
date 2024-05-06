@@ -1,0 +1,94 @@
+﻿@inherits LayoutComponentBase
+@layout MainLayout
+
+@implements IDisposable
+@inject NavigationManager NavigationManager
+
+<div class="position-relative h-100 d-flex flex-column">
+    <div class="d-block d-sm-none text-white">
+        @subPageTitle
+    </div>
+
+    <div class="d-flex flex-grow-1">
+        <input type="checkbox" title="Page Navigation menu" class="side-menu-toggler" />
+        <div class="toggleable">
+            <ul class="list-unstyled mb-0 bg-dark h-100 dynamic-font">
+                @foreach (var link in subnavigationLinks)
+                {
+                    <li class="nav-item "><NavLink class="nav-link" href="@link.Url">@link.Title</NavLink></li>
+                }
+            </ul>
+        </div>
+        <div class="flex-grow-1">
+            @Body
+        </div>
+    </div>
+</div>
+
+@code {
+    private string? currentUrl;
+    private string? subPageTitle;
+    private NavLink[] subnavigationLinks = [];
+
+    protected override void OnInitialized()
+    {
+        // Use url to define the subPageTitle
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+        subPageTitle = currentUrl.Substring(currentUrl.LastIndexOf('/') + 1).ToUpper();
+
+        // Use url to define the subnavigationLinks
+        if (currentUrl.Contains("learn/fundamentals/"))
+        {
+
+            subnavigationLinks = new NavLink[]
+            {
+                new NavLink { Title = "Overview", Url = "/learn/fundamentals/overview" },
+                new NavLink { Title = "Accoustic vs Electronic", Url = "/learn/fundamentals/accoustic-vs-electronic" },
+                new NavLink { Title = "Kit Configuration", Url = "/learn/fundamentals/kit-configuration" },
+                new NavLink { Title = "Sticks", Url = "/learn/fundamentals/sticks" },
+                new NavLink { Title = "Basic Technique", Url = "/learn/fundamentals/technique/basic" },
+                new NavLink { Title = "Further Development", Url = "/learn/fundamentals/next-steps" }
+            };
+        }
+        else if (currentUrl.Contains("learn/technique/"))
+        {
+            subnavigationLinks = new NavLink[]
+            {
+                new NavLink { Title = "Overview", Url = "/learn/technique/overview" },
+                new NavLink { Title = "Basic Rythmns", Url = "/learn/technique/basic-rythmns" },
+                new NavLink { Title = "Hand Technique", Url = "/learn/technique/hand-technique" },
+                new NavLink { Title = "Single Stroke Roll", Url = "/learn/technique/single-stroke-roll" },
+                new NavLink { Title = "Double Stroke Roll", Url = "/learn/technique/technique/double-stroke-roll" },
+                new NavLink { Title = "Parradiddles", Url = "/learn/technique/parrdiddles" },
+                new NavLink { Title = "Flam Stroke", Url = "/learn/technique/flam-stroke" },
+                new NavLink { Title = "Fills", Url = "/learn/technique/drum-fills" },
+                new NavLink { Title = "Ghost Notes", Url = "/learn/technique/ghost-notes" },
+                new NavLink { Title = "Dynamic Control", Url = "/learn/technique/dynamic-control" },
+                new NavLink { Title = "Independance", Url = "/learn/technique/independance" },
+                new NavLink { Title = "Metric Modulation", Url = "/learn/technique/metric-modulation" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+            };
+        }
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
+    private class NavLink
+    {
+        public string Title { get; set; } = "";
+        public string Url { get; set; } = "";
+    }
+}
