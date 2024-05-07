@@ -47,13 +47,6 @@ h1:focus {
 }
 
 
-/*section li {
-    font: small-caps 1em/1.3em Georgia, serif;
-    padding-bottom: 0.5em;
-}*/
-
-
-
 .dynamic-font {
     font-size: 1.1rem;
 }
@@ -123,11 +116,3 @@ h1:focus {
 }
 
 
-/*no-inline-padding-ul {
-    padding-inline-start: 0rem;
-}*/
-
-/*.dynamic-image-restrictions {
-    max-width: 60rem !important;
-    min-width: 20rem !important;
-}*/

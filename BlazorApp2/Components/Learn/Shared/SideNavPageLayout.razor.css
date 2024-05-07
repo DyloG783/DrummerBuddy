@@ -1,10 +1,10 @@
-﻿.side-menu-toggler {
+﻿#side-menu-toggler {
     appearance: none;
-    /*cursor: pointer;*/
+    cursor: pointer;
     position: absolute;
     top: -0.5rem;
     right: 0rem;
-    width: 2.9rem;
+    width: 3.5rem;
     height: 1.9rem;
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -13,32 +13,31 @@
     background-repeat: no-repeat;
 }
 
-    .side-menu-toggler:checked {
+    #side-menu-toggler:checked {
         background-color: rgba(255, 255, 255, 0.5);
     }
 
-        .side-menu-toggler:checked ~ .toggleable {
+        #side-menu-toggler:checked ~ #toggleable-side-nav {
             display: block;
         }
 
-.toggleable {
-    display: none;
+#toggleable-side-nav {
+    display: none; /* gets overridden at small screen size */
+    scrollbar-width: none; /* hide scrollbar firefox */
+    /* Allow sidebar to scroll for tall menus, 8.4rem is mobile nav average size */
+    height: calc(100vh - 8.4rem);
+    overflow-y: auto;
 }
 
-@media (min-width: 576px) {
-    .side-menu-toggler {
-        display: none;
-    }
+/* Hide the default scrollbar for all elements */
+/*::-webkit-scrollbar {
+    display: none;*/ /* For Chrome, Safari, and Opera */
+/*}*/
 
-    .toggleable {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
-        min-width: 15rem;
-        /*justify-content: center;*/
-        /* Allow sidebar to scroll for tall menus */
-        /*height: calc(100vh - 3.5rem);*/
-        /*overflow-y: auto;*/
-    }
+#side-nav-layout-body-container {
+    /* Allow tall pages to scroll, 8.4rem is mobile nav average height */
+    height: calc(100vh - 8.4rem);
+    overflow-y: auto;
 }
 
 .nav-item ::deep .nav-link {
@@ -55,4 +54,22 @@
 .nav-item ::deep .nav-link:hover {
     background-color: rgba(255,255,255,0.1);
     color: white;
+}
+
+@media (min-width: 576px) {
+    #side-menu-toggler {
+        display: none;
+    }
+
+    #toggleable-side-nav {
+        display: block;
+        min-width: 15rem;
+        /* Allow sidebar to scroll for tall menus, 9.5rem is dektop nav average height */
+        height: calc(100vh - 9.5rem);
+    }
+
+    #side-nav-layout-body-container {
+        /* Allow tall pages to scroll, 8.4rem is mobile nav average height */
+        height: calc(100vh - 9.5rem);
+    }
 }

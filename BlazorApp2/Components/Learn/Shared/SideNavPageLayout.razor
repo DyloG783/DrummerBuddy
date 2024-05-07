@@ -4,22 +4,22 @@
 @implements IDisposable
 @inject NavigationManager NavigationManager
 
-<div class="position-relative h-100 d-flex flex-column">
+<div class="position-relative d-flex flex-column">
     <div class="d-block d-sm-none text-white">
         @subPageTitle
     </div>
 
-    <div class="d-flex flex-grow-1">
-        <input type="checkbox" title="Page Navigation menu" class="side-menu-toggler" />
-        <div class="toggleable">
-            <ul class="list-unstyled mb-0 bg-dark h-100 dynamic-font">
+    <div class="d-flex flex-column flex-sm-row flex-grow-1">
+        <input id="side-menu-toggler" type="checkbox" title="Page Navigation menu" />
+        <div id="toggleable-side-nav">
+            <ul class="list-unstyled mb-0 bg-dark dynamic-font">
                 @foreach (var link in subnavigationLinks)
                 {
                     <li class="nav-item "><NavLink class="nav-link" href="@link.Url">@link.Title</NavLink></li>
                 }
             </ul>
         </div>
-        <div class="flex-grow-1">
+        <div id="side-nav-layout-body-container">
             @Body
         </div>
     </div>
@@ -67,6 +67,18 @@
                 new NavLink { Title = "Dynamic Control", Url = "/learn/technique/dynamic-control" },
                 new NavLink { Title = "Independance", Url = "/learn/technique/independance" },
                 new NavLink { Title = "Metric Modulation", Url = "/learn/technique/metric-modulation" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
+                new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
                 new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
                 new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
                 new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
