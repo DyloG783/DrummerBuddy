@@ -46,14 +46,76 @@ h1:focus {
     border-color: #929292;
 }
 
+/* Fonts */
+.font-fam-base {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+}
+
+.font-fam-secondary {
+    font-family: Bahnschrift, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Text colours */
+.page-heading-colour {
+    /*color: #00bbe6;*/
+    color: #1861ac;
+}
+
+.page-subheading-colour {
+    color: #f3751c;
+}
+
+/* Video embedding */
+
+.video-size-ratio {
+    aspect-ratio: 16 / 9;
+    width: 300px;
+}
+
+/* Dynamic font sizing */
 
 .dynamic-font {
     font-size: 1.1rem;
 }
 
+/* Dynamic bullet point sizing */
+
+.dynamic-bullets {
+    font-size: 1.3rem;
+}
+
+    .dynamic-bullets > li {
+        padding-bottom: 0.5rem;
+    }
+
+/* Page height */
+.min-calc-page-height-less-nav {
+    min-height: var(--screen-height-less-nav-mobile); /* 100vh - 8rem mobile */
+}
+
+/* Media queries */
+
+@media (min-width: 576px) {
+
+    .min-calc-page-height-less-nav {
+        min-height: var(--screen-height-less-nav-desktop); /* 100vh - 9.6rem desktop */
+    }
+
+    .video-size-ratio {
+        width: 500px;
+    }
+
     @media (min-width: 768px) {
         .dynamic-font {
             font-size: 1.2rem;
+        }
+
+        .dynamic-bullets {
+            font-size: 1.4rem;
+        }
+
+        .video-size-ratio {
+            width: 600px;
         }
     }
 
@@ -61,31 +123,23 @@ h1:focus {
         .dynamic-font {
             font-size: 1.3rem;
         }
-    }
 
-.dynamic-bullets {
-    font-size: 1.3rem;
-}
-
-    @media (min-width: 768px) {
-        .dynamic-bullets {
-            font-size: 1.4rem;
-        }
-    }
-
-    @media (min-width: 992px) {
         .dynamic-bullets {
             font-size: 1.8rem;
         }
+
+        .video-size-ratio {
+            width: 800px;
+        }
     }
 
-    .dynamic-bullets > li {
-        padding-bottom: 0.5rem;
+    /* global variables */
+    :root {
+        --screen-height-less-nav-desktop: calc(100vh - 9.6rem);
+        --screen-height-less-nav-mobile: calc(100vh - 8.0rem);
     }
 
-
-
-/*.font-testy {
+    /*.font-testy {
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     font-family: Gabriola, 'Comic Sans MS', 'Comic Sans', cursive;
 
@@ -96,23 +150,5 @@ h1:focus {
 
 
 }*/
-
-.font-fam-base {
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-}
-
-.font-fam-secondary {
-    font-family: Bahnschrift, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-
-.page-heading-colour {
-    /*color: #00bbe6;*/
-    color: #1861ac;
-}
-
-.page-subheading-colour {
-    color: #f3751c;
-}
 
 

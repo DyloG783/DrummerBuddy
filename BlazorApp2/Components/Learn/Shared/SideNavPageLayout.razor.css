@@ -9,7 +9,6 @@
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M7 10L12 15L17 10'/%3e%3c/svg%3e") no-repeat center/1.75rem rgba(255, 255, 255, 0.1);
-    /*background-image: src(../../../wwwroot/images/down-arrow.png);*/
     background-repeat: no-repeat;
 }
 
@@ -24,8 +23,6 @@
 #toggleable-side-nav {
     display: none; /* gets overridden at small screen size */
     scrollbar-width: none; /* hide scrollbar firefox */
-    /* Allow sidebar to scroll for tall menus, 8.4rem is mobile nav average size */
-    height: calc(100vh - 8.4rem);
     overflow-y: auto;
 }
 
@@ -35,9 +32,9 @@
 /*}*/
 
 #side-nav-layout-body-container {
-    /* Allow tall pages to scroll, 8.4rem is mobile nav average height */
-    height: calc(100vh - 8.4rem);
+    height: var(--screen-height-less-nav-mobile);
     overflow-y: auto;
+    flex-grow: inherit;
 }
 
 .nav-item ::deep .nav-link {
@@ -56,6 +53,7 @@
     color: white;
 }
 
+
 @media (min-width: 576px) {
     #side-menu-toggler {
         display: none;
@@ -65,11 +63,11 @@
         display: block;
         min-width: 15rem;
         /* Allow sidebar to scroll for tall menus, 9.5rem is dektop nav average height */
-        height: calc(100vh - 9.5rem);
+        height: var(--screen-height-less-nav-desktop);
     }
 
     #side-nav-layout-body-container {
         /* Allow tall pages to scroll, 8.4rem is mobile nav average height */
-        height: calc(100vh - 9.5rem);
+        height: var(--screen-height-less-nav-desktop);
     }
 }

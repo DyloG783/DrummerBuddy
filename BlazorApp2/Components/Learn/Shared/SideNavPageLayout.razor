@@ -3,6 +3,10 @@
 
 @implements IDisposable
 @inject NavigationManager NavigationManager
+@* @inject IJSRuntime JSRuntime *@
+
+@* @using Microsoft.JSInterop
+@using System.Diagnostics *@
 
 <div class="position-relative d-flex flex-column">
     <div class="d-block d-sm-none text-white">
@@ -11,19 +15,20 @@
 
     <div class="d-flex flex-column flex-sm-row flex-grow-1">
         <input id="side-menu-toggler" type="checkbox" title="Page Navigation menu" />
-        <div id="toggleable-side-nav">
-            <ul class="list-unstyled mb-0 bg-dark dynamic-font">
+        <div id="toggleable-side-nav" class="bg-dark">
+            <ul class="list-unstyled h-100 mb-0  dynamic-font">
                 @foreach (var link in subnavigationLinks)
                 {
                     <li class="nav-item "><NavLink class="nav-link" href="@link.Url">@link.Title</NavLink></li>
                 }
             </ul>
         </div>
-        <div id="side-nav-layout-body-container">
+        <div id="side-nav-layout-body-container" onscroll="getScrollTop()">
             @Body
         </div>
     </div>
 </div>
+
 
 @code {
     private string? currentUrl;
@@ -32,6 +37,7 @@
 
     protected override void OnInitialized()
     {
+
         // Use url to define the subPageTitle
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         NavigationManager.LocationChanged += OnLocationChanged;
@@ -85,6 +91,15 @@
                 new NavLink { Title = "Liner Drumming", Url = "/learn/technique/linear-drumming" },
             };
         }
+        else if (currentUrl.Contains("learn/inspiration/"))
+        {
+            subnavigationLinks = new NavLink[]
+            {
+                new NavLink { Title = "Overview", Url = "/learn/inspiration/overview" },
+                new NavLink { Title = "Danny Carey", Url = "/learn/inspiration/danny-carey" },
+                new NavLink { Title = "Matt Garstka", Url = "/learn/inspiration/matt-garstka" },
+            };
+        }
     }
 
     private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -103,4 +118,5 @@
         public string Title { get; set; } = "";
         public string Url { get; set; } = "";
     }
+
 }

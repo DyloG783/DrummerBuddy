@@ -1,39 +1,50 @@
 ﻿@implements IDisposable
 @inject NavigationManager NavigationManager
-@rendermode InteractiveServer
 
-<div class="navbar ">
-    <div class="p-3">
-        <a class="navbar-brand" href="">
-            <span class="page-heading-colour">Drummer</span> 
-            <span class="page-subheading-colour"> Buddies</span>
-        </a>
-    </div>
+<div class="p-3">
+    <a class="navbar-brand" href="">
+        <span class="page-heading-colour">Drummer</span>
+        <span class="page-subheading-colour"> Buddies</span>
+    </a>
 </div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+<input 
+    id="navbar-toggler"
+    type="checkbox" 
+    title="Navigation menu" 
+    onclick="toggleTopNavigation()"
+    />
 
-<div class="nav-scrollable px-4 container-fluid">
+<div id="nav-scrollable"
+     onclick="clickTopNavToggler()"
+     class=" px-4 container-fluid">
     <div class="row">
-        <ul class="nav nav-pills col col-sm-9 flex-column flex-sm-row justify-content-center gap-sm-5">
+        <ul class="nav nav-pills col col-sm-9 flex-column flex-sm-row justify-content-center gap-0 gap-sm-5">
             <li class="nav-item dropdown">
-                <NavLink class="nav-link dropdown-toggle nav-item" data-bs-toggle="dropdown" href="learn/" role="button" aria-expanded="false">
+                @* stop propagation when user clicks drop down menu to prevent ancestor onclick event to close navigation *@
+                <NavLink class="nav-link dropdown-toggle nav-item" data-bs-toggle="dropdown" href="learn/" 
+                    role="button" aria-expanded="false" onclick="event.stopPropagation();"
+                >
                     <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span>Learn
                 </NavLink>
                 <ul id="learn-dropdown" class="dropdown-menu bg-secondary">
                     <li class="nav-item">
-                        <NavLink 
-                            class="nav-link dropdown-item nav-item text-white" 
-                            href="learn/fundamentals/overview">Fundamentals
+                        <NavLink class="nav-link dropdown-item nav-item text-white"
+                                 href="learn/fundamentals/overview">
+                            Fundamentals
                         </NavLink>
-                     </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link dropdown-item nav-item text-white" 
-                            href="learn/technique/overview"
-                        >Techniques</NavLink>
                     </li>
                     <li class="nav-item">
-                        <NavLink class="nav-link dropdown-item nav-item text-white" href="learn/inspiration">Inspiration</NavLink>
+                        <NavLink class="nav-link dropdown-item nav-item text-white"
+                                 href="learn/technique/overview">
+                            Techniques
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link dropdown-item nav-item text-white"
+                                 href="learn/inspiration/overview">
+                            Inspiration
+                        </NavLink>
                     </li>
                 </ul>
             </li>
@@ -54,7 +65,8 @@
             <AuthorizeView>
                 <Authorized>
                     <div id="user-dropdown" class="nav-item dropdown d-flex justify-content-end">
-                        <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" ref="#" role="button" aria-expanded="false">
+                        @* stop propagation when user clicks drop down menu to prevent ancestor onclick event to close navigation *@
+                        <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" ref="#" role="button" aria-expanded="false" onclick="event.stopPropagation();">
                             <span class="bi bi-person-fill-nav-menu " aria-hidden="true"></span> @context.User.Identity?.Name
                         </a>
                         <ul class="dropdown-menu bg-secondary ">
@@ -83,7 +95,7 @@
             </AuthorizeView>
         </div>
     </div>
-    
+
 </div>
 
 @code {
@@ -105,5 +117,7 @@
     {
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
+
+
 }
 

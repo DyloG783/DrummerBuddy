@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100dvh;
     background-image: linear-gradient(270deg, #000b84 0%, rgb(0, 0, 0) 20%);
     /*background-color: #000000;*/
     /*background-color: antiquewhite;*/
